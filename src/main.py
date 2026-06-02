@@ -367,6 +367,10 @@ def _start_mitmproxy(addon: GeoFixAddon, confdir: str = None, port: int = PROXY_
     master_ref = {}
 
     def run_proxy():
+        import asyncio
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
         kwargs = dict(listen_host=PROXY_HOST, listen_port=port)
         if confdir:
             kwargs["confdir"] = confdir
